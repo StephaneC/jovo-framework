@@ -10,11 +10,17 @@ interface Context {
   lifespanCount?: number;
   parameters?: { [key: string]: any }; // tslint:disable-line
 }
+interface FollowupEventInput {
+  name: string;
+  parameters?: { [key: string]: any }; // tslint:disable-line
+  languageCode: string;
+}
 
 export interface DialogflowResponseJSON {
   fulfillmentText?: string;
   outputContexts?: Context[];
   payload?: Payload;
+  followupEventInput?: FollowupEventInput;
 }
 
 /**
@@ -26,6 +32,7 @@ export class DialogflowResponse implements JovoResponse {
   payload?: Payload;
   outputContexts?: Context[];
   sessionEntityTypes?: SessionEntityType[];
+  followupEventInput?: FollowupEventInput;
 
   getContext(name: string) {
     return this.outputContexts?.find((context: Context) => {
@@ -53,6 +60,19 @@ export class DialogflowResponse implements JovoResponse {
       return this.getSessionAttributes();
     }
   }
+
+  getFollowupEvent(): FollowupEventInput {
+    return this.followupEventInput;
+  }
+
+  setFollowupEvent(event: string, parameters?: { [key: string]: string }, languageCode?: string) {
+    this.followupEventInput = {
+      "name": event,
+      parameters,
+      languageCode
+    };
+  }
+
   // tslint:disable-next-line
   hasSessionData(name: string, value?: any): boolean {
     return this.hasSessionAttribute(name, value);
