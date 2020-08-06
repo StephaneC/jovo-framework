@@ -2,6 +2,7 @@ import _cloneDeep = require('lodash.clonedeep');
 import { DialogflowResponse } from '../src';
 const askJSON = require('../sample-response-json/v2/ASK.json');
 const tellJSON = require('../sample-response-json/v2/TELL.json');
+const followJSON = require('../sample-response-json/v2/FOLLOWUP_EVENT.json');
 
 process.env.NODE_ENV = 'TEST';
 
@@ -39,4 +40,10 @@ test('test isTell', () => {
 
   expect(response.isTell()).toBe(true);
   expect(response.isAsk()).toBe(false);
+});
+
+test('test getFollowUpEvent', () => {
+  const response = DialogflowResponse.fromJSON(_cloneDeep(followJSON));
+
+  expect(response.getFollowupEvent().name).toEqual('ASK_FEEDBACK');
 });
