@@ -8,7 +8,7 @@ import { GoogleAction } from '../core/GoogleAction';
 import { GoogleActionResponse } from '../core/GoogleActionResponse';
 import { GoogleActionSpeechBuilder } from '../core/GoogleActionSpeechBuilder';
 
-import uuidv4 = require('uuid/v4');
+import { v4 as uuidv4 } from 'uuid';
 import { EnumGoogleAssistantRequestType } from '../core/google-assistant-enums';
 import { Item, RichResponse, SimpleResponse } from '../core/Interfaces';
 import { SessionEntity, SessionEntityType } from 'jovo-platform-dialogflow';

@@ -26,7 +26,7 @@ import { Updates } from './modules/Updates';
 import { OrderUpdateV3, RichResponse } from './core/Interfaces';
 
 import { GoogleAction } from './core/GoogleAction';
-import { Handler } from 'jovo-core';
+import { Handler, JovoRequest, JovoResponse } from 'jovo-core';
 import { Transaction, PaymentOptions, OrderUpdate, OrderOptions } from './modules/Transaction';
 import { Notification } from './modules/Notification';
 
@@ -53,6 +53,8 @@ export {
 } from './modules/Transaction';
 declare module 'jovo-core/dist/src/core/Jovo' {
   interface Jovo {
+    $originalRequest?: JovoRequest;
+    $originalResponse?: JovoResponse;
     $googleAction?: GoogleAction;
 
     /**
@@ -490,3 +492,4 @@ declare module 'jovo-core/dist/src/Interfaces' {
   export interface AppPlatformConfig extends AppGoogleAssistantConfig {}
   export interface ExtensiblePluginConfigs extends AppGoogleAssistantConfig {}
 }
+

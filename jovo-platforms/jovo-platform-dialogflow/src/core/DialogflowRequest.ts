@@ -35,7 +35,14 @@ export interface DialogflowRequestJSON {
 export interface Context {
   name: string;
   lifespanCount?: number;
+  
   parameters?: { [key: string]: any }; // tslint:disable-line
+}
+
+export interface FollowupEventInput {
+  name: string;
+  parameters?: { [key: string]: any }; // tslint:disable-line
+  languageCode: string;
 }
 
 export class DialogflowRequest<T extends JovoRequest = JovoRequest> implements JovoRequest {

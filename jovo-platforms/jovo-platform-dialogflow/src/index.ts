@@ -1,6 +1,6 @@
 import { BaseApp, HandleRequest, Host, Jovo, JovoRequest, JovoResponse } from 'jovo-core';
 import { DialogflowAgent } from './DialogflowAgent';
-import { Context, DialogflowRequest } from './core/DialogflowRequest';
+import { Context, DialogflowRequest, FollowupEventInput } from './core/DialogflowRequest';
 import { DialogflowResponse } from './core/DialogflowResponse';
 import { DialogflowConfig } from './Dialogflow';
 
@@ -53,6 +53,7 @@ declare module 'jovo-core/dist/src/Interfaces' {
     Dialogflow: {
       Payload?: object;
       OutputContexts?: Context[];
+      FollowupEventInput?: FollowupEventInput;
     };
   }
 

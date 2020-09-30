@@ -306,6 +306,24 @@ export class GoogleAction extends Jovo {
   }
 
   /**
+   * 
+   * @param name 
+   * @param parameters 
+   * @param lifespanCount 
+   */
+  addFollowupEvent(name: string, parameters: { [key: string]: any }, languageCode?: string) {
+    if (!this.$output.Dialogflow) {
+      this.$output.Dialogflow = {};
+    }
+
+    this.$output.Dialogflow.FollowupEventInput = {
+      name,
+      parameters,
+      languageCode
+    };
+  }
+
+  /**
    * Returns true if the current request is of type ON_SIGN_IN
    * @public
    * @return {boolean}

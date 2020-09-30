@@ -16,7 +16,7 @@ export class DialogflowCore implements Plugin {
     sessionContextId: '_jovo_session_',
   };
 
-  constructor(config?: Config) {}
+  constructor(config?: Config) { }
 
   install(dialogFlow: Dialogflow) {
     dialogFlow.middleware('$request')!.use(this.request.bind(this));
@@ -27,7 +27,7 @@ export class DialogflowCore implements Plugin {
     dialogFlow.middleware('$inputs')!.use(this.inputs.bind(this));
     dialogFlow.middleware('$output')!.use(this.output.bind(this));
   }
-  uninstall(app: BaseApp) {}
+  uninstall(app: BaseApp) { }
 
   request(dialogflowAgent: DialogflowAgent) {
     dialogflowAgent.$request = DialogflowRequest.fromJSON(
@@ -127,6 +127,11 @@ export class DialogflowCore implements Plugin {
         lifespanCount: 1,
         parameters: { ask: true },
       });
+    }
+
+    // add event
+    if (output.Dialogflow && output.Dialogflow.FollowupEventInput) {
+      (dialogflowAgent.$response as DialogflowResponse).followupEventInput = output.Dialogflow.FollowupEventInput;
     }
 
     // add jovo session context

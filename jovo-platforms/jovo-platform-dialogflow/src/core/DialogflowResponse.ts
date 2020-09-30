@@ -1,6 +1,7 @@
 import _get = require('lodash.get');
 import { JovoResponse, SessionConstants, SessionData, SpeechBuilder } from 'jovo-core';
 import { SessionEntityType } from './Interfaces';
+import { FollowupEventInput } from './DialogflowRequest';
 
 export interface Payload {
   [key: string]: JovoResponse;
@@ -14,6 +15,7 @@ interface Context {
 export interface DialogflowResponseJSON {
   fulfillmentText?: string;
   outputContexts?: Context[];
+  followupEventInput?: FollowupEventInput;
   payload?: Payload;
 }
 
@@ -25,6 +27,7 @@ export class DialogflowResponse implements JovoResponse {
   fulfillmentText?: string;
   payload?: Payload;
   outputContexts?: Context[];
+  followupEventInput?: FollowupEventInput;
   sessionEntityTypes?: SessionEntityType[];
 
   getContext(name: string) {
